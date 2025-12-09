@@ -1,3 +1,5 @@
+# Programmed by Zaheer Lagos, co-developed with Gemini.
+
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
@@ -334,18 +336,36 @@ path_select_btn.pack(side=tk.RIGHT)
 
 
 # --- Common Elements (Status) ---
-# Status Bar (Clean Footer)
+
+# Status variable for dynamic messages
 status_var = tk.StringVar()
-status_var.set("Ready. Select a tab and enter a YouTube link.")
-status_label = tk.Label(root,
-                        textvariable=status_var,
-                        bg='#E2E8F0',  # Slate-200 footer
+status_var.set("Ready. Select a tab and enter a YouTube link.") # Initial dynamic message
+
+# 1. Create a wrapper frame for the footer
+footer_frame = tk.Frame(root, bg='#E2E8F0') # Use the footer background color
+footer_frame.pack(side=tk.BOTTOM, fill=tk.X, ipady=5)
+
+# 2. Dynamic Status Label (Left Side)
+status_label = tk.Label(footer_frame,
+                        textvariable=status_var, # Linked to the variable that changes
+                        bg='#E2E8F0',
                         fg=COLOR_TEXT,
                         bd=0,
                         relief=tk.FLAT,
                         anchor=tk.W,
                         font=('Segoe UI', 9))
-status_label.pack(side=tk.BOTTOM, fill=tk.X, ipady=5)
+status_label.pack(side=tk.LEFT, fill=tk.X, padx=(10, 5), expand=True) # Expanded to fill space
+
+# 3. Permanent Attribution Label (Right Side)
+attribution_label = tk.Label(footer_frame,
+                        text="# Programmed by Zaheer Lagos, co-developed with Gemini.",
+                        bg='#E2E8F0',
+                        fg=COLOR_TEXT,
+                        bd=0,
+                        relief=tk.FLAT,
+                        anchor=tk.E,
+                        font=('Segoe UI', 8, 'italic')) # Slightly smaller/italic font for better look
+attribution_label.pack(side=tk.RIGHT, padx=(5, 10))
 
 # Start the GUI event loop
 root.mainloop()
